@@ -82,6 +82,9 @@ $software = $registry->openSubKey("Software");
 $software->setValue("TestKey", 123); //DWORD 0x000007b (123)
 $software->setValue("TestKey", "hello"); //SZ "hello"
 
+//will be adding the ability ot use the ValueTypes
+//$software->setValue("TestKey", new Sz("Hello"));
+
 ```
 
 Retriving key/value names
