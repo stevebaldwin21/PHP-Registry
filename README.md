@@ -1,6 +1,6 @@
 # PHP Windows Registry
 
-This repository is for a work in progress OOP windows registry PHP extension for PHP7. Currently there is only global functions to access registry like the PECL extension which has not been actively developed since PHP 5.4. Currently only read is available but will added for writing keys and changing values. The namespace structure follows PSR2 Vendor\\Package\\...
+This repository is for a work in progress OOP windows registry PHP extension for PHP7. Currently there is only global functions to access registry like the PECL extension which has not been actively developed since PHP 5.4.
 
 ```php
 
@@ -50,6 +50,38 @@ catch(InvalidKeyException $e)
   //handle me..
 }
 ```
+
+Creating sub keys
+
+```php
+use Windows\Registry\RegistryHive;
+use Windows\Registry\RegistryKey;
+use Windows\Registry\RegistryValue;
+use Windows\Registry\Exception\InvalidKeyException;
+
+$registry = RegistryHive::LocalMachine();
+
+$registry->createSubKey("Hello")->createSubKey("Test");
+//or
+$registry->createSubKey("Hello\\Test");
+```
+
+Setting values
+
+```php
+use Windows\Registry\RegistryHive;
+use Windows\Registry\RegistryKey;
+use Windows\Registry\RegistryValue;
+use Windows\Registry\Exception\InvalidKeyException;
+
+$registry = RegistryHive::LocalMachine();
+
+$software = $registry->openSubKey("Software");
+$software->setValue("TestKey", 123); //DWORD 0x000007b (123)
+$software->setValue("TestKey", "hello"); //SZ "hello"
+
+```
+
 
 Enumeration
 
