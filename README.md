@@ -1,6 +1,6 @@
 # PHP Windows Registry
 
-This repository is for a work in progress OOP windows registry PHP extension for PHP7. Currently there is only global functions to access registry like the PECL extension which has not been actively developed since PHP 5.4.
+This repository is for a work in progress OOP windows registry PHP extension for PHP7. Currently there is only global functions to access registry like the PECL extension (http://svn.php.net/viewvc/pecl/win32std/) which has not been actively developed for a number of years. This implementation will follow the C# implementation of the Registry (with some small addition to class names/function names) (https://msdn.microsoft.com/en-us/library/microsoft.win32.registrykey(v=vs.110).aspx)
 
 ```php
 
