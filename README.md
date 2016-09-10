@@ -61,12 +61,14 @@ use Windows\Registry\Exception\InvalidKeyException;
 
 $registry = RegistryHive::LocalMachine();
 
-$registry->createSubKey("Hello")->createSubKey("Test");
+$newKey = $registry->createSubKey("Hello")->createSubKey("Test");
 //or
-$registry->createSubKey("Hello\\Test");
+$newKey $registry->createSubKey("Hello\\Test");
+
+$newKey->getValue(); //instanceof None (Default)
 ```
 
-Setting values
+Setting/modifying values
 
 ```php
 use Windows\Registry\RegistryHive;
@@ -82,8 +84,7 @@ $software->setValue("TestKey", "hello"); //SZ "hello"
 
 ```
 
-
-Enumeration
+Retriving key/value names
 
 ```php
 use Windows\Registry\RegistryHive;
@@ -100,6 +101,7 @@ $registry = RegistryHive::LocalMachine();
 $names = $registry->getSubKeyNames(); //array of all the subkeys
 $values = $registry->getValueNames(); //array of the value names
 
+//additionally you can use the below to check if any exist
 $hasSubKeys = $registry->hasSubKeys();
 $hasValues = $registry->hasValues(); //returns 0 if only default is present and is '(not set)'
 ```
