@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "php.h"
 #include "php_ini.h"
 #include "ext/standard/info.h"
@@ -22,6 +21,13 @@
 * @author Steve Baldwin <stevebaldwin21@googlemail.com>
 * Report bugs to the above email address
 */
+
+#define GET_PROPERTY(c, s) { ZVAL_COPY(return_value, zend_read_property(c, getThis(), s, strlen(s), 0, 0), 0, 1); }
+#define GET_STATIC_PROPERTY(c, s) { ZVAL_COPY(return_value, zend_read_static_property(c, s, strlen(s), 0, 0), 0, 1); }
+#define RETURN_THIS { ZVAL_COPY(return_value, getThis() ); }
+
+#define REGISTRY_ATTR_KEYS 0
+#define REGISTRY_ATTR_VALUES 1
 
 #define REGISTRY_NS(cls) "Windows\\Registry\\" ##cls
 #define REGISTRY_VAL_NS(cls) REGISTRY_NS("ValueTypes\\") ##cls

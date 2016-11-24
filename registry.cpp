@@ -946,9 +946,8 @@ zend_function_entry registry_binary_functions[] = {
 	PHP_FE_END
 };
 
-int load_registry_module()
+PHP_MINIT_FUNCTION(WindowsRegistry)
 {
-
 	INIT_CLASS_ENTRY(ce, REGISTRY_NS("RegistryHive"), registry_hive_functions);
 	registry_hive_class = zend_register_internal_class(&ce TSRMLS_CC);
 	registry_hive_class->ce_flags |= ZEND_ACC_FINAL;
@@ -990,6 +989,14 @@ int load_registry_module()
 	SUCCESS;
 }
 
+zend_module_entry WindowsRegistry_module_entry = {
+	STANDARD_MODULE_HEADER,
+	"WindowsRegistry",
+	NULL,
+	PHP_MINIT(WindowsRegistry), NULL, NULL, NULL, NULL,
+	NO_VERSION_YET, STANDARD_MODULE_PROPERTIES
+};
 
+ZEND_GET_MODULE(WindowsRegistry)
 
 
