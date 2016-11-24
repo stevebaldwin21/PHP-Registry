@@ -1,4 +1,3 @@
-#include "module.h"
 #include "registry.h"
 #include "exceptions.h"
 #include "zend_interfaces.h"
