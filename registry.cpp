@@ -55,17 +55,13 @@ HKEY zval_to_hkey(zval * val) {
 	return ((HKEY)(ULONG_PTR)((LONG)val->value.lval));
 }
 bool zeq(zval * a, char * b) {
+
 	if (Z_TYPE_P(a) == IS_STRING) {
-		if (stricmp(Z_STRVAL_P(a), b) == 0) {
-			return 1;
-		}
-		else {
-			return 0;
-		}
+		if (stricmp(Z_STRVAL_P(a), b) == 0) { return 1; } else { return 0; }
 	}
-	else {
-		return false;
-	}
+
+	return 0;
+
 }
 char * zval_hkey_to_string(zval * val)
 {
@@ -156,6 +152,7 @@ PHP_METHOD(RegistryHive, ClassesRoot)
 /* {{{ proto RegistryKey Registry::__construct(long node) */
 PHP_METHOD(Registry, __construct)
 {
+	//for peace of mind!
 	windows_throw_exception(windows_invalid_operation_exception, "This class cannot be instantiated manually, please use RegistryHive.");
 	return;
 }
@@ -946,7 +943,7 @@ zend_function_entry registry_binary_functions[] = {
 	PHP_FE_END
 };
 
-PHP_MINIT_FUNCTION(WindowsRegistry)
+PHP_MINIT_FUNCTION(windows_registry_module)
 {
 	INIT_CLASS_ENTRY(ce, REGISTRY_NS("RegistryHive"), registry_hive_functions);
 	registry_hive_class = zend_register_internal_class(&ce TSRMLS_CC);
@@ -988,15 +985,21 @@ PHP_MINIT_FUNCTION(WindowsRegistry)
 
 	SUCCESS;
 }
+PHP_MINFO_FUNCTION(windows_registry_module)
+{
+	php_info_print_table_start();
+	php_info_print_table_row(2, "Windows Registry", "enabled");
+	php_info_print_table_end();
+}
 
-zend_module_entry WindowsRegistry_module_entry = {
+zend_module_entry windows_registry_module_module_entry = {
 	STANDARD_MODULE_HEADER,
 	"WindowsRegistry",
 	NULL,
-	PHP_MINIT(WindowsRegistry), NULL, NULL, NULL, NULL,
+	PHP_MINIT(windows_registry_module), NULL, NULL, NULL, PHP_MINFO(windows_registry_module),
 	NO_VERSION_YET, STANDARD_MODULE_PROPERTIES
 };
 
-ZEND_GET_MODULE(WindowsRegistry)
+ZEND_GET_MODULE(windows_registry_module)
 
 

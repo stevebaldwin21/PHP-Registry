@@ -51,3 +51,4 @@ zend_class_entry *registry_reg_sz_class;
 zend_class_entry *registry_reg_none_class;
 zend_class_entry *registry_reg_dword_class;
 zend_class_entry *registry_reg_binary_class;
+

@@ -1,6 +1,6 @@
 # PHP Windows Registry
 
-This repository is for a work in progress OOP windows registry PHP extension for PHP7. Currently there is only global functions to access registry like the PECL extension (http://svn.php.net/viewvc/pecl/win32std/) which has not been actively developed for a number of years. This implementation will follow the C# implementation of the Registry (with some small addition to class names/function names) (https://msdn.microsoft.com/en-us/library/microsoft.win32.registrykey(v=vs.110).aspx)
+This repository is a windows registry PHP extension for PHP7. Currently there is only global functions to access registry like the PECL extension (http://svn.php.net/viewvc/pecl/win32std/) which has not been actively developed for a number of years. This implementation will follow the C# implementation of the Registry (with some small addition to class names/function names) (https://msdn.microsoft.com/en-us/library/microsoft.win32.registrykey(v=vs.110).aspx)
 
 ```php
 
@@ -13,7 +13,7 @@ use Windows\Registry\ValueTypes\None;
 use Windows\Registry\ValueTypes\Binary;
 use Windows\Registry\ValueTypes\Dword;
 
-$registry = RegistryHive::CurrentMachine(); //instanceof Windows\Registry\RegistryKey representing the HKEY_CURRENT_MACHINE
+$registry = RegistryHive::LocalMachine(); //instanceof Windows\Registry\RegistryKey representing the HKEY_LOCAL_MACHINE
 
 try 
 {
@@ -108,5 +108,3 @@ $values = $registry->getValueNames(); //array of the value names
 $hasSubKeys = $registry->hasSubKeys();
 $hasValues = $registry->hasValues(); //returns 0 if only default is present and is '(not set)'
 ```
-
-
